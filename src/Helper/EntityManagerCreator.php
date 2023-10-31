@@ -12,7 +12,7 @@ class EntityManagerCreator
     {
         // Create a simple "default" Doctrine ORM configuration for Attributes
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            paths: array(__DIR__ . "/../src/Entities"),
+            paths: array(__DIR__ . "/../Entities"),
             isDevMode: true,
         );
 
