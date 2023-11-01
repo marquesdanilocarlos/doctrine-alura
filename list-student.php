@@ -9,12 +9,9 @@ require __DIR__ . '/vendor/autoload.php';
 
 $em = EntityManagerCreator::create();
 $studentEntity = Student::class;
-$students = $em->createQuery(
-    "SELECT student, phone, course 
-            FROM {$studentEntity} student 
-            LEFT JOIN student.phones phone 
-            LEFT JOIN student.courses course"
-)->getResult();
+
+$studentRepository = $em->getRepository(Student::class);
+$students = $studentRepository->getStudentsAndCourses();
 
 //$students = $em->getRepository($studentEntity)->findAll();
 
