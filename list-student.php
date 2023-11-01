@@ -5,12 +5,18 @@ use App\Entities\Phone;
 use App\Entities\Student;
 use App\Helper\EntityManagerCreator;
 
-require __DIR__. '/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 $em = EntityManagerCreator::create();
 $studentEntity = Student::class;
-$students = $em->createQuery("SELECT student FROM {$studentEntity} student")->getResult();
+$students = $em->createQuery(
+    "SELECT student, phone, course 
+            FROM {$studentEntity} student 
+            LEFT JOIN student.phones phone 
+            LEFT JOIN student.courses course"
+)->getResult();
 
+//$students = $em->getRepository($studentEntity)->findAll();
 
 /**
  * @var Student[] $students
@@ -33,7 +39,7 @@ foreach ($students as $student) {
     }
 
     echo "Cursos:";
-    echo implode(', ', $student->getCourses()->map(fn (Course $course) => $course->getName())->toArray());
+    echo implode(', ', $student->getCourses()->map(fn(Course $course) => $course->getName())->toArray());
     echo '<hr>';
 }
 

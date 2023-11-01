@@ -17,7 +17,7 @@ class Student
     #[Id, GeneratedValue, Column]
     public int $id;
 
-    #[OneToMany(mappedBy: 'student', targetEntity: Phone::class, cascade: ['persist', 'remove'])]
+    #[OneToMany(mappedBy: 'student', targetEntity: Phone::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
     private Collection $phones;
 
     #[ManyToMany(targetEntity: Course::class, inversedBy: 'students')]
