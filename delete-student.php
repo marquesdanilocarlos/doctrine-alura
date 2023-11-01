@@ -7,7 +7,7 @@ require __DIR__. '/vendor/autoload.php';
 
 $em = EntityManagerCreator::create();
 
-$student = $em->getPartialReference(Student::class, 5);
+$student = $em->find(Student::class, 7);
 $em->remove($student);
 
 $em->flush();
